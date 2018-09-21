@@ -9,7 +9,7 @@ class Game
 private:
   std::deque<Card> playerOne;
   std::deque<Card> playerTwo;
-  std::deque<Card>& make_deck();
+  std::deque<Card> make_deck();
 public:
   Game();
   void start();
