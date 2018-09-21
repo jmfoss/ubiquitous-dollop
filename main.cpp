@@ -3,6 +3,6 @@
 int main()
 {
   Game war;
-  war.start();
+  war.display_hands();
   return 0;
 }

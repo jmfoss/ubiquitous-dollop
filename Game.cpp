@@ -2,15 +2,16 @@
 #include "Card.hpp"
 #include <deque>
 #include <algorithm>
-#include <ctime>
+#include <random>
 #include <iostream>
-#include <cstdlib>
+
 
 Game::Game()
 {
   std::deque<Card> deck = make_deck();
-  std::srand(std::time(0));
-  std::shuffle(deck.begin(), deck.end(), std::rand());
+  std::random_device rd;
+  std::mt19937 g(rd());
+  std::shuffle(deck.begin(), deck.end(), g;
   while (deck.begin() != deck.end())
   {
     playerOne.push_front(deck.front());
@@ -83,14 +84,14 @@ void Game::display_hands()
   for (Card card : playerOne)
   {
     ++i;
-    std::cout << i << ": " << card.get_rank() << ", " << card.get_rank() << std::endl;
+    std::cout << i << ": " << card.get_rank() << ", " << card.get_suit() << std::endl;
   }
   std::cout << "\nPlayer Two\n";
   i = 0;
   for (Card card : playerTwo)
   {
     ++i;
-    std::cout << i << ": " << card.get_rank() << ", " << card.get_rank() << std::endl;
+    std::cout << i << ": " << card.get_rank() << ", " << card.get_suit() << std::endl;
   }
   return;
 }
