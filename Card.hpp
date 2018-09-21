@@ -33,8 +33,8 @@ class Card
 public:
   Card() = default;
   Card(Rank r, Suit s);
-  Rank get_rank() const { return m_rank; };
-  Suit get_suit() const { return m_suit; };
+  Rank get_rank() const;
+  Suit get_suit() const;
 
 private:
   Rank m_rank;
