@@ -11,7 +11,7 @@ Game::Game()
   std::deque<Card> deck = make_deck();
   std::random_device rd;
   std::mt19937 g(rd());
-  std::shuffle(deck.begin(), deck.end(), g;
+  std::shuffle(deck.begin(), deck.end(), g);
   while (deck.begin() != deck.end())
   {
     playerOne.push_front(deck.front());
