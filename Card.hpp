@@ -35,7 +35,7 @@ public:
   Card(Rank r, Suit s);
   char get_rank() const { return m_rank; };
   char get_suit() const { return m_suit; };
-
+  friend std::ostream& operator<<(std::ostream& os, Card card);
 private:
   Rank m_rank;
   Suit m_suit;
