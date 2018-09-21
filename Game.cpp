@@ -4,12 +4,13 @@
 #include <algorithm>
 #include <ctime>
 #include <iostream>
+#include <cstdlib>
 
 Game::Game()
 {
   std::deque<Card> deck = make_deck();
-  std::srand(time(0));
-  std::shuffle(deck.begin(), deck.end(), rand());
+  std::srand(std::time(0));
+  std::shuffle(deck.begin(), deck.end(), std::rand());
   while (deck.begin() != deck.end())
   {
     playerOne.push_front(deck.front());
