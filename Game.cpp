@@ -1,12 +1,12 @@
 #include "Game.hpp"
 #include "Card.hpp"
 #include <deque>
-#include <utility> 
+#include <utility>
 #include <algorithm>
 #include <random>
 #include <iostream>
 
-using Spoil = pair<Card, Card>;
+using Spoil = std::pair<Card, Card>;
 
 Game::Game()
 {
