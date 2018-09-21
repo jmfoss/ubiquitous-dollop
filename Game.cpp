@@ -98,11 +98,11 @@ void Game::start()
   }
   if (playerOne.begin() != playerOne.end())
   {
-    std::cout << "\nPlayer one wins\n"
+    std::cout << "\nPlayer one wins\n";
   }
   else
   {
-    std::cout << "\nPlayer two wins\n"
+    std::cout << "\nPlayer two wins\n";
   }
   return;
 }
