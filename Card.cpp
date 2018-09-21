@@ -5,7 +5,7 @@ Card::Card(Rank r, Suit s) : m_rank(r), m_suit(s)
 {
 
 }
-
+/*
 std::ostream& operator<<(std::ostream& os, Rank rank)
 {
   switch (rank)
@@ -42,3 +42,4 @@ std::ostream& operator<<(std::ostream& os, Suit suit)
       return os;
   }
 }
+  */
