@@ -101,17 +101,17 @@ void Game::start()
     }
     else
     {
-      std::cout << "\nWar: " << one_temp << " " << two_temp;
+      std::cout << "\nWar: ";
       Spoil spoil = war();
       if (spoil.first.get_rank() > spoil.second.get_rank())
       {
-        std::cout << "\nadd1: " << one_temp;
+        std::cout << "\nadd1: " << one_temp << " " << two_temp;
         playerOne.push_back(one_temp);
         playerOne.push_back(two_temp);
       }
       else
       {
-        std::cout << "\nadd2: " << two_temp;
+        std::cout << "\nadd2: " << one_temp << " " << two_temp;
         playerTwo.push_back(two_temp);
         playerTwo.push_back(one_temp);
       }
@@ -139,6 +139,7 @@ Spoil Game::war()
 {
   Card one_temp = pop(playerOne);
   Card two_temp = pop(playerTwo);
+  std::cout << one_temp << " " << two_temp;
   if (one_temp.get_rank() > two_temp.get_rank())
   {
     std::cout << "\nWin1: " << one_temp;
