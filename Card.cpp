@@ -32,9 +32,13 @@ std::ostream& operator<<(std::ostream& os, Suit suit)
 {
   switch (suit)
   {
-    case 0: return os << "S";
-    case 1: return os << "C";
-    case 2: return os << "D";
-    case 3: return os << "H";
+    case 0:  os << "S";
+      return os;
+    case 1:  os << "C";
+      return os;
+    case 2: os << "D";
+      return os;
+    case 3: os << "H";
+      return os;
   }
 }
