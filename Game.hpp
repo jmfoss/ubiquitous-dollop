@@ -1,6 +1,20 @@
-#ifndef DECK_HPP
-#define DECK_HPP
+#ifndef GAME_HPP
+#define GAME_HPP
+
+#include "Card.hpp"
+#include <deque>
+
+class Game
+{
+private:
+  std::deque<Card> playerOne;
+  std::deque<Card> playerTwo;
+  std::deque<Card>& make_deck();
+public:
+  Game();
+  start();
+  display_hands();
+}
 
 
-
-#endif DECK_HPP
+#endif GAME_HPP

@@ -33,10 +33,12 @@ class Card
 public:
   Card() = default;
   Card(Rank r, Suit s);
+  Rank get_rank const() { return m_rank; };
+  Suit get_suit const() { return m_suit; };
 
 private:
   Rank m_rank;
   Suit m_suit;
 };
 
-#endif
+#endif CARD_HPP
