@@ -1,7 +1,7 @@
 #include "Game.hpp"
 #include "Card.hpp"
 #include <deque>
-#include <algorithms>
+#include <algorithm>
 #include <ctime>
 #include <iostream>
 
