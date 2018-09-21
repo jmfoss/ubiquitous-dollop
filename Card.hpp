@@ -1,6 +1,7 @@
 #ifndef CARD_HPP
 #define CARD_HPP
 
+#include <iostream>
 //enum that makes up suits
 enum Suit
 {
