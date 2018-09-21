@@ -5,7 +5,7 @@ Card::Card(Rank r, Suit s) : m_rank(r), m_suit(s)
 
 }
 
-char Card::get_rank()
+char Card::get_rank() const
 {
   switch (m_rank)
   {
@@ -26,7 +26,7 @@ char Card::get_rank()
 
 }
 
-char Card::get_suit
+char Card::get_suit() const
 {
   switch (m_suit)
   {
