@@ -96,7 +96,7 @@ void Game::start()
       playerTwo.push_back(one_temp);
     }
   }
-  if (playerOne.begin() == playerOne.end())
+  if (playerTwo.begin() != playerTwo.end())
   {
     std::cout << "\nPlayer two wins\n";
   }
