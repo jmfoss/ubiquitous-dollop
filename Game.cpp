@@ -103,9 +103,9 @@ void Game::start()
   }
 }
 
-Card* Game::pop(std::deque<Card>& playerDeck)
+Card Game::pop(std::deque<Card>& playerDeck)
 {
-  Card* temp = playerDeck.front();
+  Card temp = playerDeck.front();
   playerDeck.pop_front();
   return temp;
 }
