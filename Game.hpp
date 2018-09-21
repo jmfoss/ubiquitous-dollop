@@ -3,7 +3,7 @@
 
 #include "Card.hpp"
 #include <deque>
-#include <utility> 
+#include <utility>
 #include <iostream>
 
 class Game
@@ -16,7 +16,7 @@ std::deque<Card> deck;
   Card pop(std::deque<Card>& playerDeck);
 public:
   Game();
-  pair<Card, Card> war();
+  std::pair<Card, Card> war();
   void start();
   void reshuffle();
 };
