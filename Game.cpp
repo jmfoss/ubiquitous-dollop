@@ -73,12 +73,12 @@ std::deque<Card>& Game::make_deck()
                             {Ten, Hearts},
                             {Jack, Hearts},
                             {Queen, Hearts},
-                            {King, Hearts}, };
+                            {King, Hearts} };
 }
 
 void Game::display_hands()
 {
-  std::cout << "Player one\n"
+  std::cout << "Player one\n";
   int i = 0;
   for (Card card : playerOne)
   {
