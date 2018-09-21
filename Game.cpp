@@ -5,10 +5,11 @@
 #include <random>
 #include <iostream>
 
+using Spoil = pair<Card, Card>;
 
 Game::Game()
 {
-  std::deque<Card> deck = make_deck();
+  deck = make_deck();
   std::random_device rd;
   std::mt19937 g(rd());
   std::shuffle(deck.begin(), deck.end(), g);
@@ -81,19 +82,38 @@ void Game::start()
 {
   while (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
   {
+    std::cout << "\nfight: ";
     Card one_temp = pop(playerOne);
     Card two_temp = pop(playerTwo);
-    std::cout << one_temp << " "
-              << two_temp << std::endl;
-    if (one_temp.get_rank() >= two_temp.get_rank())
+    std::cout << one_temp << " " << two_temp;
+    if (one_temp.get_rank() > two_temp.get_rank())
     {
+      std::cout << "\nWin1: " << one_temp;
       playerOne.push_back(one_temp);
       playerOne.push_back(two_temp);
     }
     else if (two_temp.get_rank() > one_temp.get_rank())
     {
+      std::cout << "\nWin2: " << two_temp;
       playerTwo.push_back(two_temp);
       playerTwo.push_back(one_temp);
+    }
+    else
+    {
+      std::cout << "\nWar: ";
+      Spoil spoil = war(one_temp, two_temp);
+      if (spoil.left.get_rank > spoil.right.get_rank)
+      {
+        std::cout << "\nadd1: " << one_temp;
+        playerOne.push_back(one_temp);
+        playerOne.push_back(two_temp);
+      }
+      else
+      {
+        std::cout << "\nadd2: " << two_temp;
+        playerTwo.push_back(two_temp);
+        playerTwo.push_back(one_temp);
+      }
     }
   }
   if (playerTwo.begin() != playerTwo.end())
@@ -114,21 +134,40 @@ Card Game::pop(std::deque<Card>& playerDeck)
   return temp;
 }
 
-void Game::display_hands()
+Spoil war()
 {
-  std::cout << "Player one\n";
-  int i = 0;
-  for (Card card : playerOne)
+  Card one_temp = pop(playerOne);
+  Card two_temp = pop(playerTwo);
+  if (one_temp.get_rank() > two_temp.get_rank())
   {
-    ++i;
-    std::cout << i << ": " << card << std::endl;
+    std::cout << "\nWin1: " << one_temp << " " << two_temp;
+    playerOne.push_back(one_temp);
+    playerOne.push_back(two_temp);
+    return Spoil (one_temp, two_temp);
   }
-  std::cout << "\nPlayer Two\n";
-  i = 0;
-  for (Card card : playerTwo)
+  else if (two_temp.get_rank() > one_temp.get_rank())
   {
-    ++i;
-    std::cout << i << ": " << card << std::endl;
+    std::cout << "\nWin2: " << two_temp << " " << one_temp;
+    playerTwo.push_back(two_temp);
+    playerTwo.push_back(one_temp);
+    return Spoil (one_temp, two_temp);
   }
-  return;
+  else
+  {
+    Spoil spoil = war(one_temp, two_temp);
+    if (spoil.left.get_rank > spoil.right.get_rank)
+    {
+      std::cout << "\nadd1: " << one_temp << " " << two_temp;
+      playerOne.push_back(one_temp);
+      playerOne.push_back(two_temp);
+      return spoil
+    }
+    else
+    {
+      std::cout << "\nadd2: " << two_temp << " " << one_temp;
+      playerTwo.push_back(two_temp);
+      playerTwo.push_back(one_temp);
+      return spoil
+    }
+  }
 }
