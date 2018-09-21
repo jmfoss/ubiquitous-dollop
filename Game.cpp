@@ -83,14 +83,14 @@ void Game::start()
   {
     Card one_temp = pop(playerOne);
     Card two_temp = pop(playerTwo);
-    std::cout << one_temp.get_rank << one_temp.get_suit << " "
-              << two_temp.get_rank << one_temp.get_suit << std::endl;
-    if (one_temp.get_rank > two_temp.get_rank)
+    std::cout << one_temp.get_rank() << one_temp.get_suit() << " "
+              << two_temp.get_rank() << one_temp.get_suit() << std::endl;
+    if (one_temp.get_rank() > two_temp.get_rank())
     {
       playerOne.push_back(one_temp);
       playerOne.push_back(two_temp);
     }
-    else if (two_temp.get_rank > one_temp.get_rank)
+    else if (two_temp.get_rank() > one_temp.get_rank())
     {
       playerTwo.push_back(two_temp);
       playerTwo.push_back(one_temp);
