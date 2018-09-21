@@ -81,8 +81,8 @@ void Game::start()
 {
   while (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
   {
-    Card* one_temp = pop(playerOne);
-    Card* two_temp = pop(playerTwo);
+    Card one_temp = pop(playerOne);
+    Card two_temp = pop(playerTwo);
     std::cout << one_temp.get_rank << one_temp.get_suit << " "
               << two_temp.get_rank << one_temp.get_suit << std::endl;
     if (one_temp.get_rank > two_temp.get_rank)
