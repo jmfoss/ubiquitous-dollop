@@ -7,7 +7,7 @@
 
 Game::Game()
 {
-  std::deque<Card>* deck = make_deck();
+  std::deque<Card> deck = make_deck();
   std::srand(time(0));
   std::shuffle(deck.begin(), deck.end(), rand());
   while (deck.begin() != deck.end())
