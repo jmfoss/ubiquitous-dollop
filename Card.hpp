@@ -7,13 +7,12 @@ enum Suit
   Spades,
   Clubs,
   Diamonds,
-  Hearts,
+  Hearts
 };
 
 //enum that makes up ranks
 enum Rank
 {
-  Ace,
   Two,
   Three,
   Four,
@@ -26,6 +25,7 @@ enum Rank
   Jack,
   Queen,
   King,
+  Ace
 };
 
 class Card
@@ -33,8 +33,8 @@ class Card
 public:
   Card() = default;
   Card(Rank r, Suit s);
-  char get_rank() const;
-  char get_suit() const;
+  char get_rank() const { return m_rank; };
+  char get_suit() const { return m_suit; };
 
 private:
   Rank m_rank;
