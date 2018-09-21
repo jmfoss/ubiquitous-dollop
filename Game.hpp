@@ -15,6 +15,8 @@ public:
   Game();
   void start();
   void display_hands();
+  friend std::ostream& operator<<(std::ostream& os, Rank rank);
+  friend std::ostream& operator<<(std::ostream& os, Suit suit);
 };
 
 
