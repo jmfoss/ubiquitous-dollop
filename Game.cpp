@@ -133,7 +133,7 @@ void Game::display_hands()
   return;
 }
 
-std::ostream& operator<<(std::ostream& os, Rank rank)
+std::ostream& operator<<(std::ostream& os, const Rank& rank)
 {
   switch (rank)
   {
@@ -155,7 +155,7 @@ std::ostream& operator<<(std::ostream& os, Rank rank)
 
 }
 
-std::ostream& operator<<(std::ostream& os, Suit suit)
+std::ostream& operator<<(std::ostream& os, const Suit& suit)
 {
   switch (suit)
   {
