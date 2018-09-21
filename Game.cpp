@@ -17,10 +17,9 @@ Game::Game()
     playerTwo.push_front(deck.front());
     deck.pop_front();
   }
-  delete deck;
 }
 
-std::deque<Card>& Game::make_deck()
+std::deque<Card> Game::make_deck()
 {
   return std::deque<Card> { {Ace, Spades},
                             {Two, Spades},
@@ -85,7 +84,7 @@ void Game::display_hands()
     ++i;
     std::cout << i << ": " << card.get_rank() << ", " << card.get_rank() << std::endl;
   }
-  std::cout << "\nPlayer Two\n"
+  std::cout << "\nPlayer Two\n";
   i = 0;
   for (Card card : playerTwo)
   {
