@@ -102,7 +102,7 @@ void Game::start()
     else
     {
       std::cout << "\nWar: ";
-      Spoil spoil = war(one_temp, two_temp);
+      Spoil spoil = war();
       if (spoil.first.get_rank() > spoil.second.get_rank())
       {
         std::cout << "\nadd1: " << one_temp;
@@ -135,7 +135,7 @@ Card Game::pop(std::deque<Card>& playerDeck)
   return temp;
 }
 
-Spoil war()
+Spoil Game::war()
 {
   Card one_temp = pop(playerOne);
   Card two_temp = pop(playerTwo);
@@ -155,7 +155,7 @@ Spoil war()
   }
   else
   {
-    Spoil spoil = war(one_temp, two_temp);
+    Spoil spoil = war();
     if (spoil.first.get_rank() > spoil.second.get_rank())
     {
       std::cout << "\nadd1: " << one_temp << " " << two_temp;
