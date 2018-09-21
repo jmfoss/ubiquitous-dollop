@@ -96,13 +96,13 @@ void Game::start()
       playerTwo.push_back(one_temp);
     }
   }
-  if (playerOne.begin() != playerOne.end())
+  if (playerOne.begin() == playerOne.end())
   {
-    std::cout << "\nPlayer one wins\n";
+    std::cout << "\nPlayer two wins\n";
   }
   else
   {
-    std::cout << "\nPlayer two wins\n";
+    std::cout << "\nPlayer one wins\n";
   }
   return;
 }
@@ -121,14 +121,14 @@ void Game::display_hands()
   for (Card card : playerOne)
   {
     ++i;
-    std::cout << i << ": " << card.get_rank() << ", " << card.get_suit() << std::endl;
+    std::cout << i << ": " << card << std::endl;
   }
   std::cout << "\nPlayer Two\n";
   i = 0;
   for (Card card : playerTwo)
   {
     ++i;
-    std::cout << i << ": " << card.get_rank() << ", " << card.get_suit() << std::endl;
+    std::cout << i << ": " << card << std::endl;
   }
   return;
 }

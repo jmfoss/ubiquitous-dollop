@@ -68,8 +68,3 @@ std::ostream& operator<<(std::ostream& os, Card card)
   return os;
 
 }
-
-std::ostream& operator<<(std::ostream& os, Suit& suit)
-{
-
-}
