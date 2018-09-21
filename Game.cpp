@@ -92,4 +92,5 @@ void Game::display_hands()
     ++i;
     std::cout << i << ": " << card.get_rank() << ", " << card.get_rank() << std::endl;
   }
+  return;
 }

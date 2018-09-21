@@ -12,9 +12,9 @@ private:
   std::deque<Card>& make_deck();
 public:
   Game();
-  start();
-  display_hands();
-}
+  void start();
+  void display_hands();
+};
 
 
-#endif GAME_HPP
+#endif
