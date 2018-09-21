@@ -85,7 +85,7 @@ void Game::start()
     Card two_temp = pop(playerTwo);
     std::cout << one_temp.get_rank() << one_temp.get_suit() << " "
               << two_temp.get_rank() << one_temp.get_suit() << std::endl;
-    if (one_temp.get_rank() > two_temp.get_rank())
+    if (one_temp.get_rank() >= two_temp.get_rank())
     {
       playerOne.push_back(one_temp);
       playerOne.push_back(two_temp);
@@ -95,12 +95,16 @@ void Game::start()
       playerTwo.push_back(two_temp);
       playerTwo.push_back(one_temp);
     }
-    else
-    {
-      //war(one_temp, two_temp);
-      std::cout << "war\n";
-    }
   }
+  if (playerOne.begin() != playerOne.end())
+  {
+    std::cout << "\nPlayer one wins\n"
+  }
+  else
+  {
+    std::cout << "\nPlayer two wins\n"
+  }
+  return;
 }
 
 Card Game::pop(std::deque<Card>& playerDeck)
