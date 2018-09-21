@@ -161,14 +161,14 @@ Spoil Game::war()
       std::cout << "\nadd1: " << one_temp << " " << two_temp;
       playerOne.push_back(one_temp);
       playerOne.push_back(two_temp);
-      return spoil
+      return spoil;
     }
     else
     {
       std::cout << "\nadd2: " << two_temp << " " << one_temp;
       playerTwo.push_back(two_temp);
       playerTwo.push_back(one_temp);
-      return spoil
+      return spoil;
     }
   }
 }
