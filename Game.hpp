@@ -3,6 +3,7 @@
 
 #include "Card.hpp"
 #include <deque>
+#include <iostream>
 
 class Game
 {
