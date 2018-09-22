@@ -97,7 +97,6 @@ int Game::start()
     ++turns;
     Card one_temp = pop(playerOne);
     Card two_temp = pop(playerTwo);
-    std::cout << one_temp << " " << two_temp;
     if (one_temp.get_rank() > two_temp.get_rank())
     {
       std::cout << "\nOne win";
