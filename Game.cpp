@@ -12,6 +12,11 @@ Game::Game()
 {
   deck = make_deck();
   shuffle();
+  split();
+}
+
+void Game::split()
+{
   while (deck.begin() != deck.end())
   {
     playerOne.push_front(deck.front());

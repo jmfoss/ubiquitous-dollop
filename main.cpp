@@ -9,6 +9,7 @@ int main()
   {
     total_turns += war.start();
     war.shuffle();
+    war.split();
   }
   std::cout << std::endl << "Averge amount of turns per game: "
             << total_turns / 10;

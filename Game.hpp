@@ -19,6 +19,7 @@ public:
   std::pair<Card, Card> war();
   int start();
   void shuffle();
+  void split();
 };
 
 
