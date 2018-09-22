@@ -146,17 +146,14 @@ Spoil Game::war()
 {
   Card one_temp = pop(playerOne);
   Card two_temp = pop(playerTwo);
-  std::cout << one_temp << " " << two_temp;
   if (one_temp.get_rank() > two_temp.get_rank())
   {
-    std::cout << "\nWin1: " << one_temp;
     playerOne.push_back(one_temp);
     playerOne.push_back(two_temp);
     return Spoil (one_temp, two_temp);
   }
   else if (two_temp.get_rank() > one_temp.get_rank())
   {
-    std::cout << "\nWin2: " << two_temp;
     playerTwo.push_back(two_temp);
     playerTwo.push_back(one_temp);
     return Spoil (one_temp, two_temp);
@@ -166,14 +163,12 @@ Spoil Game::war()
     Spoil spoil = war();
     if (spoil.first.get_rank() > spoil.second.get_rank())
     {
-      std::cout << "\nadd1: " << one_temp << " " << two_temp;
       playerOne.push_back(one_temp);
       playerOne.push_back(two_temp);
       return spoil;
     }
     else
     {
-      std::cout << "\nadd2: " << one_temp << " " << two_temp;
       playerTwo.push_back(two_temp);
       playerTwo.push_back(one_temp);
       return spoil;
