@@ -101,7 +101,7 @@ int Game::start()
     }
     else if (two_temp.get_rank() > one_temp.get_rank())
     {
-      std::cout << "\nTwo win"
+      std::cout << "\nTwo win";
       playerTwo.push_back(two_temp);
       playerTwo.push_back(one_temp);
     }
@@ -110,13 +110,13 @@ int Game::start()
       Spoil spoil = war();
       if (spoil.first.get_rank() > spoil.second.get_rank())
       {
-        std::cout << "\nOne win war"
+        std::cout << "\nOne win war";
         playerOne.push_back(one_temp);
         playerOne.push_back(two_temp);
       }
       else
       {
-        std::cout << "\nTwo win war"
+        std::cout << "\nTwo win war";
         playerTwo.push_back(two_temp);
         playerTwo.push_back(one_temp);
       }
