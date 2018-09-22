@@ -17,8 +17,8 @@ std::deque<Card> deck;
 public:
   Game();
   std::pair<Card, Card> war();
-  void start();
-  void reshuffle();
+  int start();
+  void shuffle();
 };
 
 

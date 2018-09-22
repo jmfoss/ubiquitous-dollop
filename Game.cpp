@@ -11,9 +11,7 @@ using Spoil = std::pair<Card, Card>;
 Game::Game()
 {
   deck = make_deck();
-  std::random_device rd;
-  std::mt19937 g(rd());
-  std::shuffle(deck.begin(), deck.end(), g);
+  shuffle();
   while (deck.begin() != deck.end())
   {
     playerOne.push_front(deck.front());
@@ -21,6 +19,13 @@ Game::Game()
     playerTwo.push_front(deck.front());
     deck.pop_front();
   }
+}
+
+void Game::shuffle()
+{
+  std::random_device rd;
+  std::mt19937 g(rd());
+  std::shuffle(deck.begin(), deck.end(), g);
 }
 
 std::deque<Card> Game::make_deck()
@@ -79,39 +84,39 @@ std::deque<Card> Game::make_deck()
                             {King, Hearts} };
 }
 
-void Game::start()
+int Game::start()
 {
+  int turns = 0;
   while (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
   {
-    std::cout << "\nfight: ";
+    ++turns;
     Card one_temp = pop(playerOne);
     Card two_temp = pop(playerTwo);
     std::cout << one_temp << " " << two_temp;
     if (one_temp.get_rank() > two_temp.get_rank())
     {
-      std::cout << "\nWin1: " << one_temp;
+      std::cout << "\nOne win";
       playerOne.push_back(one_temp);
       playerOne.push_back(two_temp);
     }
     else if (two_temp.get_rank() > one_temp.get_rank())
     {
-      std::cout << "\nWin2: " << two_temp;
+      std::cout << "\nTwo win"
       playerTwo.push_back(two_temp);
       playerTwo.push_back(one_temp);
     }
     else
     {
-      std::cout << "\nWar: ";
       Spoil spoil = war();
       if (spoil.first.get_rank() > spoil.second.get_rank())
       {
-        std::cout << "\nadd1: " << one_temp << " " << two_temp;
+        std::cout << "\nOne win war"
         playerOne.push_back(one_temp);
         playerOne.push_back(two_temp);
       }
       else
       {
-        std::cout << "\nadd2: " << one_temp << " " << two_temp;
+        std::cout << "\nTwo win war"
         playerTwo.push_back(two_temp);
         playerTwo.push_back(one_temp);
       }
@@ -120,12 +125,14 @@ void Game::start()
   if (playerTwo.begin() != playerTwo.end())
   {
     std::cout << "\nPlayer two wins\n";
+    playerTwo.swap(deck);
   }
   else
   {
     std::cout << "\nPlayer one wins\n";
+    playerOne.swap(deck);
   }
-  return;
+  return turns;
 }
 
 Card Game::pop(std::deque<Card>& playerDeck)
