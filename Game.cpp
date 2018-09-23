@@ -122,7 +122,7 @@ int Game::start()
     //if the cards are equal, it goes into war
     else
     {
-      std::cout << "war\n";
+      //std::cout << "war\n";
       //Check if either hand is empty before entering war
       if (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
       {
@@ -274,7 +274,7 @@ Spoil Game::war()
   }
   else // if the cards are equal
   {
-    std::cout << "war\n";
+    //std::cout << "war\n";
     //Check if either hand is empty before entering war
     if (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
     {
