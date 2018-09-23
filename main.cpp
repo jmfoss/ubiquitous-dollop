@@ -25,7 +25,7 @@ int main()
   std::cout << "Shortest game by turns: " << min_turns << std::endl;
   std::cout << "Longest game by turns: " << max_turns << std::endl;
   std::cout << "Averge amount of turns per game: "
-            << total_turns / NUM_GAMES;
+            << total_turns / NUM_GAMES << std::endl;
 
   return 0;
 }
