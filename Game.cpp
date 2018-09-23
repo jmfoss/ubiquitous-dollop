@@ -308,7 +308,7 @@ Spoil Game::war()
             playerTwo.push_back(two_temp);
             playerTwo.push_back(one_temp);
           }
-          return spoil
+          return spoil;
         }
       }
       else
