@@ -15,7 +15,7 @@ int main()
     war.split();
   }
   std::cout << std::endl << "Averge amount of turns per game: "
-            << total_turns / num <<;
+            << total_turns / num;
 
   return 0;
 }
