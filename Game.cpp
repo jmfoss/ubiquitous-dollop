@@ -122,20 +122,57 @@ int Game::start()
     //if the cards are equal, it goes into war
     else
     {
-      //calls the war function and returns the
-      //final winning and losing card
-      Spoil spoil = war();
-      //using winning and losing spoil to determine where
-      //to place burnt cards
-      if (spoil.first.get_rank() > spoil.second.get_rank())
+      //Check if either hand is empty before entering war
+      if (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
       {
-        playerOne.push_back(one_temp);
-        playerOne.push_back(two_temp);
-      }
-      else
-      {
-        playerTwo.push_back(two_temp);
-        playerTwo.push_back(one_temp);
+        //burnt cards
+        Card one_burn = pop(playerOne);
+        Card two_burn = pop(playerTwo);
+        if (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
+        {
+          //calls the war function and returns the
+          //final winning and losing card
+          Spoil spoil = war();
+          //using winning and losing spoil to determine where
+          //to place burnt cards
+          if (spoil.first.get_rank() > spoil.second.get_rank())
+          {
+            playerOne.push_back(one_burn);
+            playerOne.push_back(two_burn);
+            playerOne.push_back(one_temp);
+            playerOne.push_back(two_temp);
+          }
+          else (spoil.second.get_rank() > spoil.first.get_rank())
+          {
+            playerTwo.push_back(two_burn);
+            playerTwo.push_back(one_burn);
+            playerTwo.push_back(two_temp);
+            playerTwo.push_back(one_temp);
+          }
+        }
+        else
+        {
+          if (one_burn.get_rank() > two_burn.get_rank())
+          {
+            playerOne.push_back(one_burn);
+            playerOne.push_back(two_burn);
+            playerOne.push_back(one_temp);
+            playerOne.push_back(two_temp);
+            return Spoil(one_burn, two_burn);
+          }
+          else (two_burn.get_rank() > one_burn.get_rank())
+          {
+            playerTwo.push_back(two_burn);
+            playerTwo.push_back(one_burn);
+            playerTwo.push_back(two_temp);
+            playerTwo.push_back(one_temp);
+            return Spoil(one_burn, two_burn);
+          }
+          else
+          {
+            return Spoil(one_burn, two_burn);
+          }
+        }
       }
     }
   }
@@ -190,22 +227,64 @@ Spoil Game::war()
   //if the two cards are equal
   else
   {
-
-    Spoil spoil = war();
-    //uses winning and losing spoil to determine where
-    //to place burnt cards
-    if (spoil.first.get_rank() > spoil.second.get_rank())
+    //Check if either hand is empty before entering war
+    if (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
     {
-      playerOne.push_back(one_temp);
-      playerOne.push_back(two_temp);
-      //returns winning and losing spoil
-      return spoil;
+      Card one_burn = pop(playerOne);
+      Card two_burn = pop(playerTwo);
+      //Check if either hand is empty after burn and if so compares burns
+      if (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
+      {
+        //calls the war function and returns the
+        //final winning and losing card
+        Spoil spoil = war();
+        //using winning and losing spoil to determine where
+        //to place burnt cards
+        if (spoil.first.get_rank() > spoil.second.get_rank())
+        {
+          playerOne.push_back(one_burn);
+          playerOne.push_back(two_burn);
+          playerOne.push_back(one_temp);
+          playerOne.push_back(two_temp);
+          return spoil;
+        }
+        else (spoil.second.get_rank() > spoil.first.get_rank())
+        {
+          playerTwo.push_back(two_burn);
+          playerTwo.push_back(one_burn);
+          playerTwo.push_back(two_temp);
+          playerTwo.push_back(one_temp);
+          return spoil;
+        }
+      }
+      else
+      {
+        if (one_burn.get_rank() > two_burn.get_rank())
+        {
+          playerOne.push_back(one_burn);
+          playerOne.push_back(two_burn);
+          playerOne.push_back(one_temp);
+          playerOne.push_back(two_temp);
+          return Spoil(one_burn, two_burn);
+        }
+        else (two_burn.get_rank() > one_burn.get_rank())
+        {
+          playerTwo.push_back(two_burn);
+          playerTwo.push_back(one_burn);
+          playerTwo.push_back(two_temp);
+          playerTwo.push_back(one_temp);
+          return Spoil(one_burn, two_burn);
+        }
+        else
+        {
+          return Spoil(one_burn, two_burn);
+        }
+      }
     }
     else
     {
-      playerTwo.push_back(two_temp);
-      playerTwo.push_back(one_temp);
-      return spoil;
+      //returns equal cards if player runs out of cards
+      return Spoil (one_temp, two_temp);
     }
   }
 }
