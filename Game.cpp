@@ -8,6 +8,8 @@
 
 using Spoil = std::pair<Card, Card>;
 
+//creates the deck, shuffles it and splits the deck into
+//two hands, one for each player
 Game::Game()
 {
   deck = make_deck();
@@ -15,6 +17,8 @@ Game::Game()
   split();
 }
 
+//splits deck into two hands
+//every other goes to each hand
 void Game::split()
 {
   while (deck.begin() != deck.end())
@@ -26,6 +30,7 @@ void Game::split()
   }
 }
 
+//shuffles deck
 void Game::shuffle()
 {
   std::random_device rd;
@@ -33,6 +38,7 @@ void Game::shuffle()
   std::shuffle(deck.begin(), deck.end(), g);
 }
 
+//creates a deck of 52 cards
 std::deque<Card> Game::make_deck()
 {
   return std::deque<Card> { {Ace, Spades},
@@ -89,56 +95,68 @@ std::deque<Card> Game::make_deck()
                             {King, Hearts} };
 }
 
+//runs one game of war
 int Game::start()
 {
   int turns = 0;
+  //loops while each deck is not empty
   while (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
   {
+    //keeps track of turns
     ++turns;
+    //takes off first card from the hand and returns the card
     Card one_temp = pop(playerOne);
     Card two_temp = pop(playerTwo);
+    //checks which card is greater and places
+    //the card into the winning hand
     if (one_temp.get_rank() > two_temp.get_rank())
     {
-      std::cout << "\nOne win";
       playerOne.push_back(one_temp);
       playerOne.push_back(two_temp);
     }
     else if (two_temp.get_rank() > one_temp.get_rank())
     {
-      std::cout << "\nTwo win";
       playerTwo.push_back(two_temp);
       playerTwo.push_back(one_temp);
     }
+    //if the cards are equal, it goes into war
     else
     {
+      //calls the war function and returns the
+      //final winning and losing card
       Spoil spoil = war();
+      //using winning and losing spoil to determine where
+      //to place burnt cards
       if (spoil.first.get_rank() > spoil.second.get_rank())
       {
-        std::cout << "\nOne win war";
         playerOne.push_back(one_temp);
         playerOne.push_back(two_temp);
       }
       else
       {
-        std::cout << "\nTwo win war";
         playerTwo.push_back(two_temp);
         playerTwo.push_back(one_temp);
       }
     }
   }
+
+  //checks which hand is not empty to determine who won.
   if (playerTwo.begin() != playerTwo.end())
   {
-    std::cout << "\nPlayer two wins\n";
+    std::cout << "Player two won!\n";
     playerTwo.swap(deck);
   }
   else
   {
-    std::cout << "\nPlayer one wins\n";
+    std::cout << "Player one won!\n";
     playerOne.swap(deck);
   }
+  //returns number of turns
   return turns;
 }
 
+//takes off top card and returns it
+//passed a deque of type Card
 Card Game::pop(std::deque<Card>& playerDeck)
 {
   Card temp = playerDeck.front();
@@ -146,14 +164,21 @@ Card Game::pop(std::deque<Card>& playerDeck)
   return temp;
 }
 
+//conducts war scenario
+//uses recursion if card continue to equal each other
 Spoil Game::war()
 {
+  //pops of first card
   Card one_temp = pop(playerOne);
   Card two_temp = pop(playerTwo);
+  //compares the two cards
   if (one_temp.get_rank() > two_temp.get_rank())
   {
+    //places spoils in winning hand
     playerOne.push_back(one_temp);
     playerOne.push_back(two_temp);
+    //calls spoil, passed the winning and losing cards
+    //returning them as a pair
     return Spoil (one_temp, two_temp);
   }
   else if (two_temp.get_rank() > one_temp.get_rank())
@@ -162,13 +187,18 @@ Spoil Game::war()
     playerTwo.push_back(one_temp);
     return Spoil (one_temp, two_temp);
   }
+  //if the two cards are equal
   else
   {
+
     Spoil spoil = war();
+    //uses winning and losing spoil to determine where
+    //to place burnt cards
     if (spoil.first.get_rank() > spoil.second.get_rank())
     {
       playerOne.push_back(one_temp);
       playerOne.push_back(two_temp);
+      //returns winning and losing spoil
       return spoil;
     }
     else
