@@ -230,12 +230,6 @@ int Game::start()
     std::cout << "Player one won!\n";
     playerOne.swap(deck);
   }
-  int cards = 0;
-  for (Card a : deck)
-  {
-    ++cards;
-  }
-  std::cout << "card count: " << cards << std::endl;
   //returns number of turns
   return turns;
 }
