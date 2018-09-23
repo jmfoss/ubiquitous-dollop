@@ -158,7 +158,6 @@ int Game::start()
             playerOne.push_back(two_burn);
             playerOne.push_back(one_temp);
             playerOne.push_back(two_temp);
-            return Spoil (one_burn, two_burn);
           }
           else if (two_burn.get_rank() > one_burn.get_rank())
           {
@@ -166,11 +165,6 @@ int Game::start()
             playerTwo.push_back(one_burn);
             playerTwo.push_back(two_temp);
             playerTwo.push_back(one_temp);
-            return Spoil (one_burn, two_burn);
-          }
-          else
-          {
-            return Spoil (one_burn, two_burn);
           }
         }
       }
