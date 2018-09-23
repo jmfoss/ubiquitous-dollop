@@ -142,7 +142,7 @@ int Game::start()
             playerOne.push_back(one_temp);
             playerOne.push_back(two_temp);
           }
-          else (spoil.second.get_rank() > spoil.first.get_rank())
+          else if (spoil.second.get_rank() > spoil.first.get_rank())
           {
             playerTwo.push_back(two_burn);
             playerTwo.push_back(one_burn);
@@ -158,19 +158,19 @@ int Game::start()
             playerOne.push_back(two_burn);
             playerOne.push_back(one_temp);
             playerOne.push_back(two_temp);
-            return Spoil(one_burn, two_burn);
+            return Spoil (one_burn, two_burn);
           }
-          else (two_burn.get_rank() > one_burn.get_rank())
+          else if (two_burn.get_rank() > one_burn.get_rank())
           {
             playerTwo.push_back(two_burn);
             playerTwo.push_back(one_burn);
             playerTwo.push_back(two_temp);
             playerTwo.push_back(one_temp);
-            return Spoil(one_burn, two_burn);
+            return Spoil (one_burn, two_burn);
           }
           else
           {
-            return Spoil(one_burn, two_burn);
+            return Spoil (one_burn, two_burn);
           }
         }
       }
@@ -248,7 +248,7 @@ Spoil Game::war()
           playerOne.push_back(two_temp);
           return spoil;
         }
-        else (spoil.second.get_rank() > spoil.first.get_rank())
+        else if (spoil.second.get_rank() > spoil.first.get_rank())
         {
           playerTwo.push_back(two_burn);
           playerTwo.push_back(one_burn);
@@ -265,19 +265,19 @@ Spoil Game::war()
           playerOne.push_back(two_burn);
           playerOne.push_back(one_temp);
           playerOne.push_back(two_temp);
-          return Spoil(one_burn, two_burn);
+          return Spoil (one_burn, two_burn);
         }
-        else (two_burn.get_rank() > one_burn.get_rank())
+        else if (two_burn.get_rank() > one_burn.get_rank())
         {
           playerTwo.push_back(two_burn);
           playerTwo.push_back(one_burn);
           playerTwo.push_back(two_temp);
           playerTwo.push_back(one_temp);
-          return Spoil(one_burn, two_burn);
+          return Spoil (one_burn, two_burn);
         }
         else
         {
-          return Spoil(one_burn, two_burn);
+          return Spoil (one_burn, two_burn);
         }
       }
     }
