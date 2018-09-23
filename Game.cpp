@@ -150,6 +150,23 @@ int Game::start()
             playerTwo.push_back(two_temp);
             playerTwo.push_back(one_temp);
           }
+          else
+          {
+            if (playerOne.begin() != playerOne.end())
+            {
+              playerOne.push_back(one_burn);
+              playerOne.push_back(two_burn);
+              playerOne.push_back(one_temp);
+              playerOne.push_back(two_temp);
+            }
+            else
+            {
+              playerTwo.push_back(two_burn);
+              playerTwo.push_back(one_burn);
+              playerTwo.push_back(two_temp);
+              playerTwo.push_back(one_temp);
+            }
+          }
         }
         else
         {
@@ -275,6 +292,24 @@ Spoil Game::war()
           playerTwo.push_back(one_temp);
           return spoil;
         }
+        else
+        {
+          if (playerOne.begin() != playerOne.end())
+          {
+            playerOne.push_back(one_burn);
+            playerOne.push_back(two_burn);
+            playerOne.push_back(one_temp);
+            playerOne.push_back(two_temp);
+          }
+          else
+          {
+            playerTwo.push_back(two_burn);
+            playerTwo.push_back(one_burn);
+            playerTwo.push_back(two_temp);
+            playerTwo.push_back(one_temp);
+          }
+          return spoil
+        }
       }
       else
       {
@@ -316,6 +351,16 @@ Spoil Game::war()
     }
     else
     {
+      if (playerOne.begin() != playerOne.end())
+      {
+        playerOne.push_back(one_temp);
+        playerOne.push_back(two_temp);
+      }
+      else
+      {
+        playerTwo.push_back(two_temp);
+        playerTwo.push_back(one_temp);
+      }
       //returns equal cards if player runs out of cards
       return Spoil (one_temp, two_temp);
     }
