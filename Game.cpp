@@ -167,6 +167,23 @@ int Game::start()
             playerTwo.push_back(two_temp);
             playerTwo.push_back(one_temp);
           }
+          else
+          {
+            if (playerOne.begin() != playerOne.end())
+            {
+              playerOne.push_back(one_burn);
+              playerOne.push_back(two_burn);
+              playerOne.push_back(one_temp);
+              playerOne.push_back(two_temp);
+            }
+            else
+            {
+              playerTwo.push_back(two_burn);
+              playerTwo.push_back(one_burn);
+              playerTwo.push_back(two_temp);
+              playerTwo.push_back(one_temp);
+            }
+          }
         }
       }
     }
@@ -279,6 +296,20 @@ Spoil Game::war()
         }
         else
         {
+          if (playerOne.begin() != playerOne.end())
+          {
+            playerOne.push_back(one_burn);
+            playerOne.push_back(two_burn);
+            playerOne.push_back(one_temp);
+            playerOne.push_back(two_temp);
+          }
+          else
+          {
+            playerTwo.push_back(two_burn);
+            playerTwo.push_back(one_burn);
+            playerTwo.push_back(two_temp);
+            playerTwo.push_back(one_temp);
+          }
           return Spoil (one_burn, two_burn);
         }
       }
