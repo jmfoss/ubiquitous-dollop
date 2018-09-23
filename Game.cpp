@@ -203,6 +203,19 @@ int Game::start()
           }
         }
       }
+      else
+      {
+        if (playerOne.begin() != playerOne.end())
+        {
+          playerOne.push_back(one_temp);
+          playerOne.push_back(two_temp);
+        }
+        else
+        {
+          playerTwo.push_back(two_temp);
+          playerTwo.push_back(one_temp);
+        }
+      }
     }
   }
 
@@ -259,8 +272,7 @@ Spoil Game::war()
     playerTwo.push_back(one_temp);
     return Spoil (one_temp, two_temp);
   }
-  //if the two cards are equal
-  else
+  else // if the cards are equal
   {
     std::cout << "war\n";
     //Check if either hand is empty before entering war
