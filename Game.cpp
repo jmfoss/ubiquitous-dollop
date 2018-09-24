@@ -41,13 +41,13 @@ void Game::add(bool player)
   //shuffle
   std::deque<Card> bothSpoil;
   bothSpoil.swap(oneSpoils);
-  for (Card a : twoSpoil)
+  for (Card a : twoSpoils)
   {
     bothSpoil.push_back(a);
   }
   std::random_device rd;
   std::mt19937 g(rd());
-  std::shuffle(bothSpoil.begin(), BothSpoil.end(), g);
+  std::shuffle(bothSpoil.begin(), bothSpoil.end(), g);
   if (player)
   {
     while (bothSpoil.begin() != bothSpoil.end())
