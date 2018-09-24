@@ -174,7 +174,7 @@ int Game::start()
             playerOne.push_back(pop(twoSpoils));
           }
         }
-        else if (two_burn.get_rank() > one_burn.get_rank())
+        else if (twoSpoils.back().get_rank() > oneSpoils.back().get_rank())
         {
           while (twoSpoils.begin() != twoSpoils.end())
           {
