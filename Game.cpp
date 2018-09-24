@@ -108,12 +108,12 @@ int Game::start()
     twoSpoils.push_back(pop(playerTwo));
     //checks which card is greater and places
     //the card into the winning hand
-    if (oneSpoils.back.get_rank() > twoSpoils.back.get_rank())
+    if (oneSpoils.back().get_rank() > twoSpoils.back().get_rank())
     {
       playerOne.push_back(pop(oneSpoils));
       playerOne.push_back(pop(twoSpoils));
     }
-    else if (twoSpoils.back.get_rank() > oneSpoils.back.get_rank())
+    else if (twoSpoils.back().get_rank() > oneSpoils.back().get_rank())
     {
       playerTwo.push_back(pop(twoSpoils));
       playerTwo.push_back(pop(oneSpoils));
@@ -128,7 +128,7 @@ int Game::start()
         war();
         //using winning and losing spoil to determine where
         //to place burnt cards
-        if (oneSpoils.back.get_rank() > twoSpoils.back.get_rank())
+        if (oneSpoils.back().get_rank() > twoSpoils.back().get_rank())
         {
           while (oneSpoils.begin() != oneSpoils.end())
           {
@@ -136,7 +136,7 @@ int Game::start()
             playerOne.push_back(pop(twoSpoils));
           }
         }
-        else if (twoSpoils.back.get_rank() > oneSpoils.back.get_rank())
+        else if (twoSpoils.back().get_rank() > oneSpoils.back().get_rank())
         {
           while (twoSpoils.begin() != twoSpoils.end())
           {
@@ -166,7 +166,7 @@ int Game::start()
       }
       else
       {
-        if (oneSpoils.back.get_rank() > twoSpoils.back.get_rank())
+        if (oneSpoils.back().get_rank() > twoSpoils.back().get_rank())
         {
           while (oneSpoils.begin() != oneSpoils.end())
           {
@@ -241,7 +241,7 @@ void Game::war()
   {
     oneSpoils.push_back(pop(playerOne));
     twoSpoils.push_back(pop(playerTwo));
-    if (oneSpoils.back.get_rank() == twoSpoils.back.get_rank())
+    if (oneSpoils.back().get_rank() == twoSpoils.back().get_rank())
     {
       if (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
       {
