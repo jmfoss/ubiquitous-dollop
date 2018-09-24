@@ -34,13 +34,14 @@ void Game::add(bool player)
       playerTwo.push_back(pop(oneSpoils));
     }
   }
+  return;
 }
 
 bool Game::compare()
 {
   if (oneSpoils.back().get_rank() > twoSpoils.back().get_rank())
   {
-    add(true)
+    add(true);
     return false;
   }
   else if (twoSpoils.back().get_rank() > oneSpoils.back().get_rank())
