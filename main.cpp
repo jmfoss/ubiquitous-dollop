@@ -4,7 +4,7 @@
 int main()
 {
   Game war;
-  const unsigned int NUM_GAMES = 100000;
+  const unsigned int NUM_GAMES = 100;
   unsigned int total_turns = 0, min_turns = 0, max_turns = 0;
   for (int i = 0, turns = 0; i < NUM_GAMES; ++i)
   {
