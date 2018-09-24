@@ -6,7 +6,6 @@
 #include <random>
 #include <iostream>
 
-using Spoil = std::pair<Card, Card>;
 
 //creates the deck, shuffles it and splits the deck into
 //two hands, one for each player
@@ -105,115 +104,102 @@ int Game::start()
     //keeps track of turns
     ++turns;
     //takes off first card from the hand and returns the card
-    Card one_temp = pop(playerOne);
-    Card two_temp = pop(playerTwo);
+    oneSpoils.push_back(pop(playerOne));
+    twoSpoils.push_back(pop(playerTwo));
     //checks which card is greater and places
     //the card into the winning hand
-    if (one_temp.get_rank() > two_temp.get_rank())
+    if (oneSpoils.back.get_rank() > twoSpoils.back.get_rank())
     {
-      playerOne.push_back(one_temp);
-      playerOne.push_back(two_temp);
+      playerOne.push_back(pop(oneSpoils));
+      playerOne.push_back(pop(twoSpoils));
     }
-    else if (two_temp.get_rank() > one_temp.get_rank())
+    else if (twoSpoils.back.get_rank() > oneSpoils.back.get_rank())
     {
-      playerTwo.push_back(two_temp);
-      playerTwo.push_back(one_temp);
+      playerTwo.push_back(pop(twoSpoils));
+      playerTwo.push_back(pop(oneSpoils));
     }
     //if the cards are equal, it goes into war
     else
     {
-      //std::cout << "war\n";
       //Check if either hand is empty before entering war
       if (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
       {
-        //burnt cards
-        Card one_burn = pop(playerOne);
-        Card two_burn = pop(playerTwo);
-        if (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
+        //calls the war function
+        war();
+        //using winning and losing spoil to determine where
+        //to place burnt cards
+        if (oneSpoils.back.get_rank() > twoSpoils.back.get_rank())
         {
-          //calls the war function and returns the
-          //final winning and losing card
-          Spoil spoil = war();
-          //using winning and losing spoil to determine where
-          //to place burnt cards
-          if (spoil.first.get_rank() > spoil.second.get_rank())
+          while (oneSpoils.begin() != oneSpoils.end())
           {
-            playerOne.push_back(one_burn);
-            playerOne.push_back(two_burn);
-            playerOne.push_back(one_temp);
-            playerOne.push_back(two_temp);
+            playerOne.push_back(pop(oneSpoils));
+            playerOne.push_back(pop(twoSpoils));
           }
-          else if (spoil.second.get_rank() > spoil.first.get_rank())
+        }
+        else if (twoSpoils.back.get_rank() > oneSpoils.back.get_rank())
+        {
+          while (twoSpoils.begin() != twoSpoils.end())
           {
-            playerTwo.push_back(two_burn);
-            playerTwo.push_back(one_burn);
-            playerTwo.push_back(two_temp);
-            playerTwo.push_back(one_temp);
-          }
-          else
-          {
-            if (playerOne.begin() != playerOne.end())
-            {
-              playerOne.push_back(one_burn);
-              playerOne.push_back(two_burn);
-              playerOne.push_back(one_temp);
-              playerOne.push_back(two_temp);
-            }
-            else
-            {
-              playerTwo.push_back(two_burn);
-              playerTwo.push_back(one_burn);
-              playerTwo.push_back(two_temp);
-              playerTwo.push_back(one_temp);
-            }
+            playerTwo.push_back(pop(twoSpoils));
+            playerTwo.push_back(pop(oneSpoils));
           }
         }
         else
         {
-          if (one_burn.get_rank() > two_burn.get_rank())
+          if (playerOne.begin() != playerOne.end())
           {
-            playerOne.push_back(one_burn);
-            playerOne.push_back(two_burn);
-            playerOne.push_back(one_temp);
-            playerOne.push_back(two_temp);
-          }
-          else if (two_burn.get_rank() > one_burn.get_rank())
-          {
-            playerTwo.push_back(two_burn);
-            playerTwo.push_back(one_burn);
-            playerTwo.push_back(two_temp);
-            playerTwo.push_back(one_temp);
+            while (oneSpoils.begin() != oneSpoils.end())
+            {
+              playerOne.push_back(pop(oneSpoils));
+              playerOne.push_back(pop(twoSpoils));
+            }
           }
           else
           {
-            if (playerOne.begin() != playerOne.end())
+            while (twoSpoils.begin() != twoSpoils.end())
             {
-              playerOne.push_back(one_burn);
-              playerOne.push_back(two_burn);
-              playerOne.push_back(one_temp);
-              playerOne.push_back(two_temp);
-            }
-            else
-            {
-              playerTwo.push_back(two_burn);
-              playerTwo.push_back(one_burn);
-              playerTwo.push_back(two_temp);
-              playerTwo.push_back(one_temp);
+              playerTwo.push_back(pop(twoSpoils));
+              playerTwo.push_back(pop(oneSpoils));
             }
           }
         }
       }
       else
       {
-        if (playerOne.begin() != playerOne.end())
+        if (oneSpoils.back.get_rank() > twoSpoils.back.get_rank())
         {
-          playerOne.push_back(one_temp);
-          playerOne.push_back(two_temp);
+          while (oneSpoils.begin() != oneSpoils.end())
+          {
+            playerOne.push_back(pop(oneSpoils));
+            playerOne.push_back(pop(twoSpoils));
+          }
+        }
+        else if (two_burn.get_rank() > one_burn.get_rank())
+        {
+          while (twoSpoils.begin() != twoSpoils.end())
+          {
+            playerTwo.push_back(pop(twoSpoils));
+            playerTwo.push_back(pop(oneSpoils));
+          }
         }
         else
         {
-          playerTwo.push_back(two_temp);
-          playerTwo.push_back(one_temp);
+          if (playerOne.begin() != playerOne.end())
+          {
+            while (oneSpoils.begin() != oneSpoils.end())
+            {
+              playerOne.push_back(pop(oneSpoils));
+              playerOne.push_back(pop(twoSpoils));
+            }
+          }
+          else
+          {
+            while (twoSpoils.begin() != twoSpoils.end())
+            {
+              playerTwo.push_back(pop(twoSpoils));
+              playerTwo.push_back(pop(oneSpoils));
+            }
+          }
         }
       }
     }
@@ -245,130 +231,23 @@ Card Game::pop(std::deque<Card>& playerDeck)
 
 //conducts war scenario
 //uses recursion if card continue to equal each other
-Spoil Game::war()
+void Game::war()
 {
-  //pops of first card
-  Card one_temp = pop(playerOne);
-  Card two_temp = pop(playerTwo);
+  //burn
+  oneSpoils.push_back(pop(playerOne));
+  twoSpoils.push_back(pop(playerTwo));
   //compares the two cards
-  if (one_temp.get_rank() > two_temp.get_rank())
+  if (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
   {
-    //places spoils in winning hand
-    playerOne.push_back(one_temp);
-    playerOne.push_back(two_temp);
-    //calls spoil, passed the winning and losing cards
-    //returning them as a pair
-    return Spoil (one_temp, two_temp);
-  }
-  else if (two_temp.get_rank() > one_temp.get_rank())
-  {
-    playerTwo.push_back(two_temp);
-    playerTwo.push_back(one_temp);
-    return Spoil (one_temp, two_temp);
-  }
-  else // if the cards are equal
-  {
-    //std::cout << "war\n";
-    //Check if either hand is empty before entering war
-    if (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
+    oneSpoils.push_back(pop(playerOne));
+    twoSpoils.push_back(pop(playerTwo));
+    if (oneSpoils.back.get_rank() == twoSpoils.back.get_rank())
     {
-      Card one_burn = pop(playerOne);
-      Card two_burn = pop(playerTwo);
-      //Check if either hand is empty after burn and if so compares burns
       if (playerOne.begin() != playerOne.end() && playerTwo.begin() != playerTwo.end())
       {
-        //calls the war function and returns the
-        //final winning and losing card
-        Spoil spoil = war();
-        //using winning and losing spoil to determine where
-        //to place burnt cards
-        if (spoil.first.get_rank() > spoil.second.get_rank())
-        {
-          playerOne.push_back(one_burn);
-          playerOne.push_back(two_burn);
-          playerOne.push_back(one_temp);
-          playerOne.push_back(two_temp);
-          return spoil;
-        }
-        else if (spoil.second.get_rank() > spoil.first.get_rank())
-        {
-          playerTwo.push_back(two_burn);
-          playerTwo.push_back(one_burn);
-          playerTwo.push_back(two_temp);
-          playerTwo.push_back(one_temp);
-          return spoil;
-        }
-        else
-        {
-          if (playerOne.begin() != playerOne.end())
-          {
-            playerOne.push_back(one_burn);
-            playerOne.push_back(two_burn);
-            playerOne.push_back(one_temp);
-            playerOne.push_back(two_temp);
-          }
-          else
-          {
-            playerTwo.push_back(two_burn);
-            playerTwo.push_back(one_burn);
-            playerTwo.push_back(two_temp);
-            playerTwo.push_back(one_temp);
-          }
-          return spoil;
-        }
+        war();
       }
-      else
-      {
-        if (one_burn.get_rank() > two_burn.get_rank())
-        {
-          playerOne.push_back(one_burn);
-          playerOne.push_back(two_burn);
-          playerOne.push_back(one_temp);
-          playerOne.push_back(two_temp);
-          return Spoil (one_burn, two_burn);
-        }
-        else if (two_burn.get_rank() > one_burn.get_rank())
-        {
-          playerTwo.push_back(two_burn);
-          playerTwo.push_back(one_burn);
-          playerTwo.push_back(two_temp);
-          playerTwo.push_back(one_temp);
-          return Spoil (one_burn, two_burn);
-        }
-        else
-        {
-          if (playerOne.begin() != playerOne.end())
-          {
-            playerOne.push_back(one_burn);
-            playerOne.push_back(two_burn);
-            playerOne.push_back(one_temp);
-            playerOne.push_back(two_temp);
-          }
-          else
-          {
-            playerTwo.push_back(two_burn);
-            playerTwo.push_back(one_burn);
-            playerTwo.push_back(two_temp);
-            playerTwo.push_back(one_temp);
-          }
-          return Spoil (one_burn, two_burn);
-        }
-      }
-    }
-    else
-    {
-      if (playerOne.begin() != playerOne.end())
-      {
-        playerOne.push_back(one_temp);
-        playerOne.push_back(two_temp);
-      }
-      else
-      {
-        playerTwo.push_back(two_temp);
-        playerTwo.push_back(one_temp);
-      }
-      //returns equal cards if player runs out of cards
-      return Spoil (one_temp, two_temp);
     }
   }
+  return;
 }
