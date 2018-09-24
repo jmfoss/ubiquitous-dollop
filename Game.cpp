@@ -16,24 +16,36 @@ Game::Game()
   split();
 }
 
-bool Game::compare()
+void Game::add(bool player)
 {
-  if (oneSpoils.back().get_rank() > twoSpoils.back().get_rank())
+  if (player)
   {
     while (oneSpoils.begin() != oneSpoils.end())
     {
       playerOne.push_back(pop(oneSpoils));
       playerOne.push_back(pop(twoSpoils));
     }
-    return false;
   }
-  else if (twoSpoils.back().get_rank() > oneSpoils.back().get_rank())
+  else
   {
     while (twoSpoils.begin() != twoSpoils.end())
     {
       playerTwo.push_back(pop(twoSpoils));
       playerTwo.push_back(pop(oneSpoils));
     }
+  }
+}
+
+bool Game::compare()
+{
+  if (oneSpoils.back().get_rank() > twoSpoils.back().get_rank())
+  {
+    add(true)
+    return false;
+  }
+  else if (twoSpoils.back().get_rank() > oneSpoils.back().get_rank())
+  {
+    add(false);
     return false;
   }
   else
@@ -172,19 +184,11 @@ int Game::start()
       {
         if (playerOne.begin() != playerOne.end())
         {
-          while (oneSpoils.begin() != oneSpoils.end())
-          {
-            playerOne.push_back(pop(oneSpoils));
-            playerOne.push_back(pop(twoSpoils));
-          }
+          add(true);
         }
         else
         {
-          while (twoSpoils.begin() != twoSpoils.end())
-          {
-            playerTwo.push_back(pop(twoSpoils));
-            playerTwo.push_back(pop(oneSpoils));
-          }
+          add(false);
         }
       }
     }

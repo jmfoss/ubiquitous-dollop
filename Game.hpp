@@ -18,6 +18,7 @@ private:
   std::deque<Card> make_deck();
   bool compare();
   void war();
+  void add(bool player);
   Card pop(std::deque<Card>& playerDeck);
 
 public:
