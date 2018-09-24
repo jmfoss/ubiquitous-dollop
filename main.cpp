@@ -4,8 +4,8 @@
 int main()
 {
   Game war;
-  const int NUM_GAMES = 10000;
-  int total_turns = 0, min_turns = 0, max_turns = 0;
+  const unsigned int NUM_GAMES = 1000000;
+  unsigned int total_turns = 0, min_turns = 0, max_turns = 0;
   for (int i = 0, turns = 0; i < NUM_GAMES; ++i)
   {
     turns = war.start();
