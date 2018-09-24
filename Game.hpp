@@ -16,10 +16,12 @@ private:
   std::deque<Card> twoSpoils;
   std::deque<Card> spoils;
   std::deque<Card> make_deck();
+  bool compare();
+  void war();
   Card pop(std::deque<Card>& playerDeck);
+
 public:
   Game();
-  void war();
   int start();
   void shuffle();
   void split();

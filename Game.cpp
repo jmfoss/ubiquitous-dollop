@@ -16,6 +16,31 @@ Game::Game()
   split();
 }
 
+bool Game::compare()
+{
+  if (oneSpoils.back().get_rank() > twoSpoils.back().get_rank())
+  {
+    while (oneSpoils.begin() != oneSpoils.end())
+    {
+      playerOne.push_back(pop(oneSpoils));
+      playerOne.push_back(pop(twoSpoils));
+    }
+    return false;
+  }
+  else if (twoSpoils.back().get_rank() > oneSpoils.back().get_rank())
+  {
+    while (twoSpoils.begin() != twoSpoils.end())
+    {
+      playerTwo.push_back(pop(twoSpoils));
+      playerTwo.push_back(pop(oneSpoils));
+    }
+    return false;
+  }
+  else
+  {
+    return true;
+  }
+}
 //splits deck into two hands
 //every other goes to each hand
 void Game::split()
@@ -108,6 +133,7 @@ int Game::start()
     twoSpoils.push_back(pop(playerTwo));
     //checks which card is greater and places
     //the card into the winning hand
+    /*
     if (oneSpoils.back().get_rank() > twoSpoils.back().get_rank())
     {
       playerOne.push_back(pop(oneSpoils));
@@ -118,11 +144,13 @@ int Game::start()
       playerTwo.push_back(pop(twoSpoils));
       playerTwo.push_back(pop(oneSpoils));
     }
+    */
     //if the cards are equal, it goes into war
-    else
+
+    if (compare())
     {
-      //calls the war function
       war();
+      /*
       if (oneSpoils.back().get_rank() > twoSpoils.back().get_rank())
       {
         while (oneSpoils.begin() != oneSpoils.end())
@@ -139,7 +167,8 @@ int Game::start()
           playerTwo.push_back(pop(oneSpoils));
         }
       }
-      else
+      */
+      if (compare())
       {
         if (playerOne.begin() != playerOne.end())
         {
