@@ -18,6 +18,8 @@ Game::Game()
 
 void Game::add(bool player)
 {
+  //non shuffle
+  /*
   if (player)
   {
     while (oneSpoils.begin() != oneSpoils.end())
@@ -34,6 +36,33 @@ void Game::add(bool player)
       playerTwo.push_back(pop(oneSpoils));
     }
   }
+  */
+
+  //shuffle
+  std::deque<Card> bothSpoil;
+  bothSpoil.swap(oneSpoils);
+  for (Card a : twoSpoil)
+  {
+    bothSpoil.push_back(a);
+  }
+  std::random_device rd;
+  std::mt19937 g(rd());
+  std::shuffle(bothSpoil.begin(), BothSpoil.end(), g);
+  if (player)
+  {
+    while (bothSpoil.begin() != bothSpoil.end())
+    {
+      playerOne.push_back(pop(bothSpoil));
+    }
+  }
+  else
+  {
+    while (bothSpoil.begin() != bothSpoil.end())
+    {
+      playerTwo.push_back(pop(bothSpoil));
+    }
+  }
+
   return;
 }
 
