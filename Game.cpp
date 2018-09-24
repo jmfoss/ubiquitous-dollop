@@ -216,6 +216,12 @@ int Game::start()
     std::cout << "Player one won!\n";
     playerOne.swap(deck);
   }
+  int count = 0;
+  for (Card a : deck)
+  {
+    ++count;
+  }
+  std::cout << "Card count: " << count;
   //returns number of turns
   return turns;
 }
