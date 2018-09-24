@@ -221,7 +221,7 @@ int Game::start()
   {
     ++count;
   }
-  std::cout << "Card count: " << count;
+  std::cout << "Card count: " << count << std::endl;
   //returns number of turns
   return turns;
 }
