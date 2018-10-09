@@ -1,0 +1,6 @@
+A) The bug seemed to be related to how cards where placed into the deck. 
+   Whenever a "tie"occurs, which really is not a tie, just the game hitting 10,000 turns,
+   the cards are evenly split between each player. if you observe the individual wins of each turn,
+   you will see that each player wins every other turn. This cause the game to never end.
+B) To fix this I changed the way in which cards where placed into the deck. Instead of always
+   the first players card to go into the deck first, the winning card always go into the deck first.
