@@ -2,7 +2,7 @@
 #include "card.hpp"
 #include <algorithm>
 
-// array sorted high card to low
+// precondition: Array holds 5, non-repeating, suited Cards
 Value::Value(std::array<PlayingCard, 5> &h)
   : m_hand(h)
 {
