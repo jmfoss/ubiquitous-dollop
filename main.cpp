@@ -9,9 +9,9 @@ main()
 {
   std::array<PlayingCard, 5> h1 {Card{Jack, Hearts},
                                    Card{Queen, Hearts},
-                                   Card{Two, Hearts},
-                                   Card{Jack, Hearts},
-                                   Card{Jack, Hearts}};
+                                   Card{Ace, Hearts},
+                                   Card{King, Hearts},
+                                   Card{Ten, Hearts}};
   Value pokerHand(h1);
   std::array<Rank, 5> h2 = pokerHand.get_cards();
   for (auto a : h2)

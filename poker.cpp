@@ -48,7 +48,7 @@ unsigned Value::determineType()
   if (isStraightFlush()) return 8;
   if (isFourOfAKind()) return 7;
   if (isFullHouse()) return 6;
-  if (isFlush()) return 5;
+  //if (isFlush()) return 5;
   if (isStraight()) return 4;
   if (isThreeOfAKind()) return 3;
   if (isTwoPair()) return 2;
@@ -131,7 +131,7 @@ void Value::swapCardsByIndex(int index1, int index2)
 }
 bool Value::isRoyalFlush()
 {
-  return  isStraight() && isFlush() && m_hand[0].get_normal().get_rank() == Ace;
+  return (isStraight() && isFlush() && m_hand[0].get_normal().get_rank() == Ace);
 }
 
 bool Value::isStraightFlush()
@@ -171,22 +171,38 @@ bool Value::isFullHouse()
 
 bool Value::isFlush()
 {
+  int i, j, min_j;
+      for ( i = 0 ; i < 5 ; i ++ )
+      {
+         min_j = i;
+
+         for ( j = i+1 ; j < 5 ; j++ )
+         {
+            if ( m_hand[j].get_normal().get_suit() < m_hand[min_j].get_normal().get_suit() )
+            {
+               min_j = j;
+            }
+         }
+         PlayingCard help = m_hand[i];
+         m_hand[i] = m_hand[min_j];
+         m_hand[min_j] = help;
+      }
   return( m_hand[0].get_normal().get_suit() == m_hand[4].get_normal().get_suit());
 }
 
 bool Value::isStraight()
 {
   int testRank = 0;
-         testRank = m_hand[0].get_normal().get_rank() - 1;
-         for (int i = 1; i < 5; i++ )
+         testRank = m_hand[4].get_normal().get_rank() + 1;
+         for (int i = 3; i > -1; --i )
          {
             if ( m_hand[i].get_normal().get_rank() != testRank )
-               return(false);        // Straight failed...
+               return false;        // Straight failed...
 
-            testRank++;   // Next card in hand
+            ++testRank;   // Next card in hand
          }
 
-         return(true);        // Straight found !
+         return true;        // Straight found !
 }
 
 bool Value::isThreeOfAKind()
