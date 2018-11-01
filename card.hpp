@@ -164,3 +164,4 @@ std::ostream& operator<<(std::ostream& os, Suit s);
 std::ostream& operator<<(std::ostream& os, Color c);
 std::ostream& operator<<(std::ostream& os, Card c);
 std::ostream& operator<<(std::ostream& os, Joker j);
+std::istream& operator>>(std::istream& is, PlayingCard& p);

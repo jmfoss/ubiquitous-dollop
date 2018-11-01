@@ -323,3 +323,12 @@ operator<<(std::ostream& os, Joker j)
 {
   return os << j.color;
 }
+
+std::istream&
+operator>>(std::istream& is, PlayingCard& p)
+{
+  Card c;
+  is >> c;
+  p = c;
+  return is;
+}
