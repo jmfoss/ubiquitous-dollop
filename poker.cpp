@@ -48,7 +48,7 @@ unsigned Value::determineType()
   if (isStraightFlush()) return 8;
   if (isFourOfAKind()) return 7;
   if (isFullHouse()) return 6;
-  //if (isFlush()) return 5;
+  if (isFlush()) return 5;
   if (isStraight()) return 4;
   if (isThreeOfAKind()) return 3;
   if (isTwoPair()) return 2;
@@ -171,23 +171,10 @@ bool Value::isFullHouse()
 
 bool Value::isFlush()
 {
-  int i, j, min_j;
-      for ( i = 0 ; i < 5 ; i ++ )
-      {
-         min_j = i;
-
-         for ( j = i+1 ; j < 5 ; j++ )
-         {
-            if ( m_hand[j].get_normal().get_suit() < m_hand[min_j].get_normal().get_suit() )
-            {
-               min_j = j;
-            }
-         }
-         PlayingCard help = m_hand[i];
-         m_hand[i] = m_hand[min_j];
-         m_hand[min_j] = help;
-      }
-  return( m_hand[0].get_normal().get_suit() == m_hand[4].get_normal().get_suit());
+  return( m_hand[0].get_normal().get_suit() == m_hand[1].get_normal().get_suit() &&
+          m_hand[0].get_normal().get_suit() == m_hand[2].get_normal().get_suit() &&
+          m_hand[0].get_normal().get_suit() == m_hand[3].get_normal().get_suit() &&
+          m_hand[0].get_normal().get_suit() == m_hand[4].get_normal().get_suit());
 }
 
 bool Value::isStraight()
