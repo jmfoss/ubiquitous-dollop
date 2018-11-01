@@ -7,11 +7,11 @@
 int
 main()
 {
-  std::array<PlayingCard, 5> h1 {Card{King, Diamonds},
-                                 Card{Queen, Diamonds},
-                                 Card{Ace, Diamonds},
-                                 Card{Ten, Diamonds},
-                                 Card{Jack, Diamonds}};
+  std::array<PlayingCard, 5> h1 {Card{Ace, Hearts},
+                                 Card{King, Hearts},
+                                 Card{Queen, Hearts},
+                                 Card{Jack, Hearts},
+                                 Card{Ten, Hearts}};
   std::cout << "Type in 5 cards, RankSuit, seperated by spaces(Ex: 2D TS AC...): ";
   for(auto& a : h1)
   {

@@ -23,13 +23,14 @@ Value::Value(std::array<PlayingCard, 5> &h)
     case 1: sortOnePair();
       break;
   }
+
   m_value = ((type << 20) |
             (static_cast<unsigned>(m_hand[0].get_normal().get_rank()) << 16) |
             (static_cast<unsigned>(m_hand[1].get_normal().get_rank()) << 12) |
             (static_cast<unsigned>(m_hand[2].get_normal().get_rank()) << 8) |
             (static_cast<unsigned>(m_hand[3].get_normal().get_rank()) << 4) |
             (static_cast<unsigned>(m_hand[4].get_normal().get_rank()) << 0));
-  //delete m_hand;
+  m_hand.~array();
   return;
 }
 
