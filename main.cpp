@@ -1,5 +1,6 @@
 
 #include "card.hpp"
+#include "poker.hpp"
 
 #include <iostream>
 
@@ -13,12 +14,17 @@ void print(PlayingCard c)
 }
 
 int
-main() 
+main()
 {
-  PlayingCard sa {Card{Ace, Spades}};
-  PlayingCard s2 {Card{Two, Spades}};
-  PlayingCard jr {Joker{Red}};
-  print(sa); // OK
-  print(s2); // OK?
-  print(jr); // OK?
+  std::array<PlayingCard, 5> h1 {Card{Jack, Hearts},
+                                   Card{Queen, Hearts},
+                                   Card{Two, Clubs},
+                                   Card{Jack, Clubs},
+                                   Card{Jack, Diamonds}};
+  Value pokerHand(h1);
+  std::array<Rank, 5> h2 = pokerHand.get_cards();
+  for (auto a : h2)
+    std::cout << a << "\n";
+
+  std::cout << "the hand is " << pokerHand.get_hand_type() << "\n";
 }

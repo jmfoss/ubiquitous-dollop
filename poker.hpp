@@ -1,90 +1,5 @@
-
 #include "card.hpp"
-
-// Values of a poker hand:
-// - High card
-// - Two
-// - Two pair
-// - Three
-// - Straight (5 consecutive, ace plays both)
-// - Flush (same color)
-// - Full House
-// - Four
-// - Straight Flush
-
-struct High
-{
-  // We need all 5 ranks since two hands might
-  // have the same crappy hand.
-  //
-  // Must be sorted in order of rank.
-  std::array<Rank, 5> ranks;
-};
-
-bool operator<(High a, High b)
-{
-  return a.ranks < b.ranks;
-}
-
-struct Two
-{
-  // The rank of the pair.
-  Rank pair;
-
-  // The sorted rank of remaining cards.
-  std::array<Rank, 3> high;
-};
-
-struct TwoPair
-{
-  // The sorted ranks of pairs.
-  std::array<Rank, 2> pairs;
-
-  // The remaining high card.
-  Rank high;
-};
-
-struct Three
-{
-  // The rank of the three-of-a-kind.
-  Rank three;
-
-  // Sorted high cards for tie breakers.
-  std::array<Rank, 2>;
-};
-
-struct Straight
-{
-  // The rank of the highest card.
-  Rank high;
-};
-
-struct Flush
-{
-  // High card for equal flushes wins.
-  std::array<Rank, 5>;
-};
-
-struct FullHouse
-{
-  // Two ranks: the pair over the triple.
-  std::array<Rank, 2>;
-};
-
-struct Four
-{
-  Rank rank;
-
-  // NOTE: Not usually needed since you can't
-  // have two equal four-of-a-kind values.
-  Rank high;
-};
-
-struct StraightFlush
-{
-  // Just need the rank of the high card.
-  Rank high;
-};
+#include <array>
 
 // Discriminator for the values of a poker hand.
 enum ValueKind
@@ -100,41 +15,32 @@ enum ValueKind
   straight_flush,
 };
 
-enum ValueData
+class Value
 {
-  High high;
-  Two two;
-  TwoPair twice;
-  Three three;
-  Straight straight;
-  Flush flush;
-  FullHouse house;
-  Four four;
-  StraightFlush sf;
-};
+private:
+  unsigned m_value;
+  std::array<PlayingCard, 5> m_hand;
+  unsigned determineType();
+  bool isRoyalFlush();
+  bool isStraightFlush();
+  bool isFourOfAKind();
+  bool isFullHouse();
+  bool isFlush();
+  bool isStraight();
+  bool isThreeOfAKind();
+  bool isTwoPair();
+  bool isOnePair();
+  void sortFourOfAKind();
+  void sortFullHouse();
+  void sortThreeOfAKind();
+  void sortTwoPair();
+  void sortOnePair();
+  void swapCardsByIndex(int a, int b);
 
-struct Value
-{
-  ValueKind k;
-  ValueData d;
-};
+public:
+  Value(std::array<PlayingCard, 5> &h);
+  unsigned get_raw_value() { return m_value; }
+  std::array<Rank, 5> get_cards();
+  ValueKind get_hand_type();
 
-bool operator<(const Value& a, const Value& b)
-{
-  if (a.k < b.k)
-    return true;
-  if (b.k < a.k)
-    return false;
-  switch (a.k) {
-  case high:
-    return a.high < b.high;
-  case two_kind:
-  case two_pair:
-  case three_kind:
-  case straight:
-  case flush:
-  case full_house:
-  case four_kind:
-  case straight_flush:
-  }
-}
+};
