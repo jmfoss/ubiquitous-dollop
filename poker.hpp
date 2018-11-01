@@ -1,4 +1,5 @@
 #include "card.hpp"
+#include <iostream>
 #include <array>
 
 // Discriminator for the values of a poker hand.
@@ -13,7 +14,10 @@ enum ValueKind
   full_house,
   four_kind,
   straight_flush,
+  royal_flush,
 };
+
+
 
 class Value
 {
@@ -44,3 +48,6 @@ public:
   ValueKind get_hand_type();
 
 };
+
+std::ostream&
+operator<<(std::ostream& os, ValueKind c);

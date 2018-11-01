@@ -4,23 +4,14 @@
 
 #include <iostream>
 
-
-void print(PlayingCard c)
-{
-  if (c.is_normal())
-    std::cout << c.get_normal() << '\n';
-  else
-    std::cout << c.get_joker() << '\n';
-}
-
 int
 main()
 {
   std::array<PlayingCard, 5> h1 {Card{Jack, Hearts},
                                    Card{Queen, Hearts},
-                                   Card{Two, Clubs},
-                                   Card{Jack, Clubs},
-                                   Card{Jack, Diamonds}};
+                                   Card{Two, Hearts},
+                                   Card{Jack, Hearts},
+                                   Card{Jack, Hearts}};
   Value pokerHand(h1);
   std::array<Rank, 5> h2 = pokerHand.get_cards();
   for (auto a : h2)

@@ -277,3 +277,20 @@ bool operator>=(Value& a, Value& b)
 {
   return !(a < b);
 }
+
+std::ostream&
+operator<<(std::ostream& os, ValueKind k)
+{
+  switch (k) {
+  case high: return os << "High Card";
+  case two_kind: return os << "Two of a kind";
+  case two_pair: return os << "Two pair";
+  case three_kind: return os << "Three of a kind";
+  case straight: return os << "Straight";
+  case flush: return os << "Flush";
+  case full_house: return os << "Full house";
+  case four_kind: return os << "Four of a kind";
+  case straight_flush: return os << "Straight Flush";
+  case royal_flush: return os << "Royal Flush";
+  }
+}
