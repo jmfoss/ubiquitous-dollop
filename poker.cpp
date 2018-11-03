@@ -3,11 +3,11 @@
 #include <algorithm>
 
 // precondition: Array holds 5, non-repeating, suited Cards
-Value::Value(std::array<PlayingCard, 5> &h)
-  : m_hand(h)
+PokerHand::PokerHand(std::array<PlayingCard, 5> hand)
+  : m_hand(hand)
 {
-  assert(h.size() == 5);
   unsigned type = 0;
+  assert(m_hand.size() == 5);
   std::sort(m_hand.rbegin(), m_hand.rend());
   type = determineType();
   switch(type)
@@ -30,11 +30,10 @@ Value::Value(std::array<PlayingCard, 5> &h)
             (static_cast<unsigned>(m_hand[2].get_normal().get_rank()) << 8) |
             (static_cast<unsigned>(m_hand[3].get_normal().get_rank()) << 4) |
             (static_cast<unsigned>(m_hand[4].get_normal().get_rank()) << 0));
-  m_hand.~array();
   return;
 }
 
-std::array<Rank, 5> Value::get_cards()
+std::array<Rank, 5> PokerHand::get_cards()
 {
   return std::array<Rank, 5> {static_cast<Rank>((m_value >> 16) & 0xf),
                               static_cast<Rank>((m_value >> 12) & 0xf),
@@ -43,7 +42,7 @@ std::array<Rank, 5> Value::get_cards()
                               static_cast<Rank>((m_value >> 0) & 0xf)};
 }
 
-unsigned Value::determineType()
+unsigned PokerHand::determineType()
 {
   if (isRoyalFlush()) return 9;
   if (isStraightFlush()) return 8;
@@ -57,12 +56,12 @@ unsigned Value::determineType()
   return 0;
 }
 
-ValueKind Value::get_hand_type()
+ValueKind PokerHand::get_hand_type()
 {
   return static_cast<ValueKind>(m_value >> 20);
 }
 
-void Value::sortFourOfAKind()
+void PokerHand::sortFourOfAKind()
 {
     if (m_hand[0].get_normal().get_rank() != m_hand[1].get_normal().get_rank())
     {                                                           // If the four of a kind are the last four cards
@@ -70,7 +69,7 @@ void Value::sortFourOfAKind()
     }                                                           // e.g. AS, 9D, 9H, 9S, 9C => 9C, 9D, 9H, 9S, AS
 }
 
-void Value::sortFullHouse()
+void PokerHand::sortFullHouse()
 {
     if (m_hand[0].get_normal().get_rank() != m_hand[2].get_normal().get_rank())
     {                                               // If the 3 of a kind cards are the last three
@@ -79,7 +78,7 @@ void Value::sortFullHouse()
     }
 }
 
-void Value::sortThreeOfAKind()
+void PokerHand::sortThreeOfAKind()
 {                                                                                       // If the 3 of a kind cards are the middle 3 cards
     if (m_hand[0].get_normal().get_rank() != m_hand[2].get_normal().get_rank() &&
         m_hand[4].get_normal().get_rank() != m_hand[3].get_normal().get_rank())
@@ -93,7 +92,7 @@ void Value::sortThreeOfAKind()
     }
 }
 
-void Value::sortTwoPair()
+void PokerHand::sortTwoPair()
 {
     if (m_hand[0].get_normal().get_rank() != m_hand[1].get_normal().get_rank())
     {                                                                        // If the two pairs are the last 4 cards
@@ -107,7 +106,7 @@ void Value::sortTwoPair()
     }                                                                       // e.g. JS, JC, 8D, 4H, 4S => JS, JC, 4S, 4H, 8D
 }
 
-void Value::sortOnePair()
+void PokerHand::sortOnePair()
 {                                                                    // If the pair are cards 2 and 3, swap cards 1 and 3
     if (m_hand[1].get_normal().get_rank() == m_hand[2].get_normal().get_rank())
     {                                                                // e.g QD, 8H, 8C, 6S, 4J => 8C, 8H, QD, 6S, 4J
@@ -124,23 +123,23 @@ void Value::sortOnePair()
     }
 }
 
-void Value::swapCardsByIndex(int index1, int index2)
+void PokerHand::swapCardsByIndex(int index1, int index2)
 {
     PlayingCard temp = m_hand[index1];
     m_hand[index1] = m_hand[index2];
     m_hand[index2] = temp;
 }
-bool Value::isRoyalFlush()
+bool PokerHand::isRoyalFlush()
 {
   return (isStraight() && isFlush() && m_hand[0].get_normal().get_rank() == Ace);
 }
 
-bool Value::isStraightFlush()
+bool PokerHand::isStraightFlush()
 {
   return isStraight() && isFlush();
 }
 
-bool Value::isFourOfAKind()
+bool PokerHand::isFourOfAKind()
 {
     bool upper, lower;
     upper = m_hand[0].get_normal().get_rank() == m_hand[1].get_normal().get_rank() &&
@@ -153,7 +152,7 @@ bool Value::isFourOfAKind()
     return( upper || lower );
 }
 
-bool Value::isFullHouse()
+bool PokerHand::isFullHouse()
 {
   bool upper, lower;
 
@@ -170,7 +169,7 @@ bool Value::isFullHouse()
       return( upper || lower );
 }
 
-bool Value::isFlush()
+bool PokerHand::isFlush()
 {
   return( m_hand[0].get_normal().get_suit() == m_hand[1].get_normal().get_suit() &&
           m_hand[0].get_normal().get_suit() == m_hand[2].get_normal().get_suit() &&
@@ -178,7 +177,7 @@ bool Value::isFlush()
           m_hand[0].get_normal().get_suit() == m_hand[4].get_normal().get_suit());
 }
 
-bool Value::isStraight()
+bool PokerHand::isStraight()
 {
   int testRank = 0;
          testRank = m_hand[4].get_normal().get_rank() + 1;
@@ -193,7 +192,7 @@ bool Value::isStraight()
          return true;        // Straight found !
 }
 
-bool Value::isThreeOfAKind()
+bool PokerHand::isThreeOfAKind()
 {
   bool upper, middle, lower;
 
@@ -212,7 +211,7 @@ bool Value::isThreeOfAKind()
   return( upper || middle || lower );
 }
 
-bool Value::isTwoPair()
+bool PokerHand::isTwoPair()
 {
   bool upper, middle, lower;
 
@@ -231,7 +230,7 @@ bool Value::isTwoPair()
      return( upper || middle || lower );
 }
 
-bool Value::isOnePair()
+bool PokerHand::isOnePair()
 {
   bool upper, midUpper, midLower, lower;
 
@@ -252,32 +251,32 @@ bool Value::isOnePair()
 
 
 
-bool operator==(Value& a, Value& b)
+bool operator==(PokerHand& a, PokerHand& b)
 {
   return a.get_raw_value() == b.get_raw_value();
 }
 
-bool operator!=(Value& a, Value& b)
+bool operator!=(PokerHand& a, PokerHand& b)
 {
   return !(a == b);
 }
 
-bool operator<(Value& a, Value& b)
+bool operator<(PokerHand& a, PokerHand& b)
 {
   return a.get_raw_value() < b.get_raw_value();
 }
 
-bool operator>(Value& a, Value& b)
+bool operator>(PokerHand& a, PokerHand& b)
 {
   return b < a;
 }
 
-bool operator<=(Value& a, Value& b)
+bool operator<=(PokerHand& a, PokerHand& b)
 {
   return !(b < a);
 }
 
-bool operator>=(Value& a, Value& b)
+bool operator>=(PokerHand& a, PokerHand& b)
 {
   return !(a < b);
 }

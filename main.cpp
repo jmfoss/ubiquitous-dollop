@@ -17,12 +17,10 @@ main()
   {
     std::cin >> a;
   }
+  PokerHand pokerHand(h1);
 
-
-  Value pokerHand(h1);
   std::array<Rank, 5> h2 = pokerHand.get_cards();
   for (auto a : h2)
     std::cout << a << "\n";
-
-  std::cout << "the hand is " << pokerHand.get_hand_type() << "\n";
+  return 0;
 }

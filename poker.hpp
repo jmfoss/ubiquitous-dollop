@@ -19,10 +19,11 @@ enum ValueKind
 
 
 
-class Value
+class PokerHand
 {
 private:
   unsigned m_value;
+  //is there a way to delete this after construction?
   std::array<PlayingCard, 5> m_hand;
   unsigned determineType();
   bool isRoyalFlush();
@@ -42,7 +43,7 @@ private:
   void swapCardsByIndex(int a, int b);
 
 public:
-  Value(std::array<PlayingCard, 5> &h);
+  PokerHand(std::array<PlayingCard, 5> hand);
   unsigned get_raw_value() { return m_value; }
   std::array<Rank, 5> get_cards();
   ValueKind get_hand_type();
@@ -51,3 +52,9 @@ public:
 
 std::ostream&
 operator<<(std::ostream& os, ValueKind c);
+
+bool operator==(PokerHand& a, PokerHand& b);
+bool operator!=(PokerHand& a, PokerHand& b);
+bool operator>(PokerHand& a, PokerHand& b);
+bool operator<(PokerHand& a, PokerHand& b);
+bool operator>=(PokerHand& a, PokerHand& b);
